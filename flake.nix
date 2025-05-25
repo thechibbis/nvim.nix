@@ -92,6 +92,7 @@
           nixd # I would go for nixd but lazy chooses this one idk
           stylua
           rust-analyzer
+          taplo
           gopls
           sqlfluff
         ];
