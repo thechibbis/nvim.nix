@@ -1,1 +1,1 @@
-vim.g.lazyvim_rust_diagnostics = 'bacon-ls'
+vim.g.lazyvim_rust_diagnostics = 'bacon'
