@@ -93,7 +93,6 @@
           stylua
           rust-analyzer
           taplo
-          bacon
           gopls
           sqlfluff
         ];
