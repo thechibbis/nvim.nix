@@ -144,6 +144,7 @@
           #   ]
           # ))
           crates-nvim
+          oil-nvim
 
           # sometimes you have to fix some names
           { plugin = rose-pine; name = "rose-pine"; }
