@@ -94,8 +94,9 @@ local lazyOptions = {
 require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 'lazy.nvim' }, {
   { 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
 
-  { import = 'lazyvim.plugins.extras.coding.nvim-cmp' },
+  { import = 'lazyvim.plugins.extras.coding.blink' },
   { import = 'lazyvim.plugins.extras.coding.luasnip' },
+  { import = 'lazyvim.plugins.extras.ai.supermaven' },
 
   { import = 'lazyvim.plugins.extras.lang.rust' },
   { import = 'lazyvim.plugins.extras.lang.go' },
