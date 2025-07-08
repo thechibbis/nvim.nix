@@ -4,7 +4,7 @@ return {
     local keys = require('lazyvim.plugins.lsp.keymaps').get()
 
     keys[#keys + 1] = { 'K', '<cmd>lua vim.lsp.buf.hover()<CR>' }
-    keys[#keys + 1] = { 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>' }
+    keys[#keys + 1] = { 'vgd', '<cmd>lua vim.lsp.buf.definition()<CR>' }
     keys[#keys + 1] = { '<leader>vws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>' }
     keys[#keys + 1] = { '<leader>vd', '<cmd>lua vim.diagnostic.open_float()<CR>' }
     keys[#keys + 1] = { '[d', '<cmd>lua vim.diagnostic.goto_next()<CR>' }
