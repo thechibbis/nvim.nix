@@ -95,6 +95,7 @@
           taplo
           gopls
           sqlfluff
+          elixir-ls
         ];
       };
 
