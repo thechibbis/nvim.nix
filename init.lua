@@ -68,6 +68,7 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
   { import = 'lazyvim.plugins.extras.lang.go' },
   { import = 'lazyvim.plugins.extras.lang.docker' },
   { import = 'lazyvim.plugins.extras.lang.nix' },
+  { import = 'lazyvim.plugins.extras.lang.elixir' },
   { import = 'lazyvim.plugins.extras.lang.toml' },
   { import = 'lazyvim.plugins.extras.lang.sql' },
 
