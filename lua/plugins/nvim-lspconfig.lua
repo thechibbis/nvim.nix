@@ -54,7 +54,7 @@ return {
         enabled = false,
       },
       elixirls = {
-        cmd = { 'elixir-ls' },
+        cmd = { '/nix/store/8l20s3w8n4a6biax09j6b4qnq9v7yc5x-home-manager-path/bin/elixir-ls' },
         keys = {
           {
             '<leader>cp',
