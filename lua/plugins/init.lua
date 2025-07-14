@@ -10,4 +10,29 @@ return {
       vim.keymap.set('n', '<leader>pv', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     end,
   },
+  {
+    'elixir-tools/elixir-tools.nvim',
+    version = '*',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
+      local elixir = require 'elixir'
+
+      elixir.setup {
+        nextls = { enable = false },
+        elixirls = {
+          enable = true,
+          settings = {
+            dialyzerEnabled = true,
+            suggestSpecs = true,
+          },
+        },
+        projectionist = {
+          enable = false,
+        },
+      }
+    end,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+  },
 }

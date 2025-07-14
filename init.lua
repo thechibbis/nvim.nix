@@ -58,7 +58,7 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
 
   { import = 'lazyvim.plugins.extras.editor.neo-tree' },
 
-  { import = 'lazyvim.plugins.extras.coding.blink' },
+  { import = 'lazyvim.plugins.extras.coding.nvim-cmp' },
   { import = 'lazyvim.plugins.extras.coding.luasnip' },
   { import = 'lazyvim.plugins.extras.ai.supermaven' },
 
@@ -68,7 +68,6 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
   { import = 'lazyvim.plugins.extras.lang.go' },
   { import = 'lazyvim.plugins.extras.lang.docker' },
   { import = 'lazyvim.plugins.extras.lang.nix' },
-  { import = 'lazyvim.plugins.extras.lang.elixir' },
   { import = 'lazyvim.plugins.extras.lang.toml' },
   { import = 'lazyvim.plugins.extras.lang.sql' },
 

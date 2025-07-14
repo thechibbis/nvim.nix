@@ -18,24 +18,13 @@ return {
         settings = {
           nixd = {
             nixpkgs = {
-              -- in the extras set of your package definition:
-              -- nixdExtras.nixpkgs = ''import ${pkgs.path} {}''
               expr = nixCats.extra 'nixdExtras.nixpkgs' or [[import <nixpkgs> {}]],
             },
             options = {
-              -- If you integrated with your system flake,
-              -- you should use inputs.self as the path to your system flake
-              -- that way it will ALWAYS work, regardless
-              -- of where your config actually was.
               nixos = {
-                -- nixdExtras.nixos_options = ''(builtins.getFlake "path:${builtins.toString inputs.self.outPath}").nixosConfigurations.configname.options''
                 expr = nixCats.extra 'nixdExtras.nixos_options',
               },
-              -- If you have your config as a separate flake, inputs.self would be referring to the wrong flake.
-              -- You can override the correct one into your package definition on import in your main configuration,
-              -- or just put an absolute path to where it usually is and accept the impurity.
               ['home-manager'] = {
-                -- nixdExtras.home_manager_options = ''(builtins.getFlake "path:${builtins.toString inputs.self.outPath}").homeConfigurations.configname.options''
                 expr = nixCats.extra 'nixdExtras.home_manager_options',
               },
             },
@@ -53,12 +42,39 @@ return {
       nil_ls = {
         enabled = false,
       },
-      elixirls = {
-        cmd = { '/nix/store/8l20s3w8n4a6biax09j6b4qnq9v7yc5x-home-manager-path/bin/elixir-ls' },
-        autoBuild = true,
-        dialyzerEnabled = true,
-        incrementalDialyzer = true,
-        suggestSpecs = true,
+      tailwindcss = {
+        root_dir = function(_fname)
+          return vim.loop.cwd()
+        end,
+        settings = {
+          tailwindCSS = {
+            classAttributes = { 'class', 'className' },
+            includeLanguages = { heex = 'hmtl', elixir = 'hmtl', eex = 'hmtl' },
+          },
+        },
+      },
+      emmet_language_server = {
+        filetypes = {
+          'html',
+          'css',
+          'scss',
+          'javascript',
+          'typescript',
+          'vue',
+          'svelte',
+          'php',
+          'twig',
+          'blade',
+          'markdown',
+          'yaml',
+          'toml',
+          'json',
+          'nix',
+          'elixir',
+          'eelixir',
+          'heex',
+          'eex',
+        },
       },
     },
   },

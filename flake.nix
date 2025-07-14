@@ -78,6 +78,8 @@
         general = [
           universal-ctags
           curl
+          mise
+          rtx
           # NOTE:
           # lazygit
           # Apparently lazygit when launched via snacks cant create its own config file
@@ -95,6 +97,8 @@
           taplo
           gopls
           sqlfluff
+          tailwindcss-language-server
+          emmet-language-server
         ];
       };
 
