@@ -100,6 +100,7 @@
           tailwindcss-language-server
           emmet-language-server
           vtsls
+          biome
         ];
       };
 
