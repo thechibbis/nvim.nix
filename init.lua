@@ -70,7 +70,6 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
   { import = 'lazyvim.plugins.extras.lang.tailwind' },
   { import = 'lazyvim.plugins.extras.lang.prisma' },
 
-  { import = 'lazyvim.plugins.extras.lang.rust' },
   { import = 'lazyvim.plugins.extras.lang.go' },
   { import = 'lazyvim.plugins.extras.lang.docker' },
   { import = 'lazyvim.plugins.extras.lang.nix' },

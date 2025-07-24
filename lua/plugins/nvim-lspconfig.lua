@@ -14,6 +14,18 @@ return {
   },
   opts = {
     servers = {
+      rust_analyzer = {
+        settings = {
+          ['rust-analyzer'] = {
+            procMacro = {
+              enable = true,
+            },
+            check = {
+              command = 'clippy',
+            },
+          },
+        },
+      },
       nixd = {
         settings = {
           nixd = {
