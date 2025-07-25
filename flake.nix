@@ -104,6 +104,7 @@
           emmet-language-server
           nixd
           stylua
+          gopls
         ];
         kickstart-debug = [
           delve
@@ -144,6 +145,7 @@
           oil-nvim
           lspkind-nvim
           windsurf-nvim
+          noice-nvim
           # This is for if you only want some of the grammars
           # (nvim-treesitter.withPlugins (
           #   plugins: with plugins; [
@@ -266,11 +268,6 @@
           kickstart-debug = true;
           kickstart-lint = true;
           kickstart-indent_line = true;
-
-          # this kickstart extra didnt require any extra plugins
-          # so it doesnt have a category above.
-          # but we can still send the info from nix to lua that we want it!
-          kickstart-gitsigns = true;
 
           # we can pass whatever we want actually.
           have_nerd_font = false;
