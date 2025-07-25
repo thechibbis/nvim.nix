@@ -1,5 +1,22 @@
 # Copyright (c) 2023 BirdeeHub
 # Licensed under the MIT license
+
+# This is an empty nixCats config.
+# you may import this template directly into your nvim folder
+# and then add plugins to categories here,
+# and call the plugins with their default functions
+# within your lua, rather than through the nvim package manager's method.
+# Use the help, and the example config github:BirdeeHub/nixCats-nvim?dir=templates/example
+
+# It allows for easy adoption of nix,
+# while still providing all the extra nix features immediately.
+# Configure in lua, check for a few categories, set a few settings,
+# output packages with combinations of those categories and settings.
+
+# All the same options you make here will be automatically exported in a form available
+# in home manager and in nixosModules, as well as from other flakes.
+# each section is tagged with its relevant help section.
+
 {
   description = "A Lua-natic's neovim flake, with extra cats! nixCats!";
 
@@ -7,9 +24,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
 
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-    };
+    # neovim-nightly-overlay = {
+    #   url = "github:nix-community/neovim-nightly-overlay";
+    # };
 
     # see :help nixCats.flake.inputs
     # If you want your plugin to be loaded by the standard overlay,
@@ -26,7 +43,7 @@
   # see :help nixCats.flake.outputs
   outputs = { self, nixpkgs, nixCats, ... }@inputs: let
     inherit (nixCats) utils;
-    luaPath = "${./.}";
+    luaPath = ./.;
     forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
     # the following extra_pkg_config contains any values
     # which you want to pass to the config set of nixpkgs
@@ -34,7 +51,7 @@
     # will not apply to module imports
     # as that will have your system values
     extra_pkg_config = {
-      # allowUnfree = true;
+      allowUnfree = true;
     };
     # management of the system variable is one of the harder parts of using flakes.
 
@@ -77,71 +94,56 @@
       lspsAndRuntimeDeps = with pkgs; {
         general = [
           universal-ctags
-          curl
-          mise
-          rtx
-          # NOTE:
-          # lazygit
-          # Apparently lazygit when launched via snacks cant create its own config file
-          # but we can add one from nix!
-          (pkgs.writeShellScriptBin "lazygit" ''
-            exec ${pkgs.lazygit}/bin/lazygit --use-config-file ${pkgs.writeText "lazygit_config.yml" ""} "$@"
-          '')
           ripgrep
           fd
           stdenv.cc.cc
+          nix-doc
           lua-language-server
-          nixd # I would go for nixd but lazy chooses this one idk
-          stylua
-          rust-analyzer
-          taplo
-          gopls
-          sqlfluff
+          rust-analyzer 
           tailwindcss-language-server
           emmet-language-server
-          vtsls
+          nixd
+          stylua
+        ];
+        kickstart-debug = [
+          delve
+        ];
+        kickstart-lint = [
+          markdownlint-cli
           biome
         ];
       };
 
-      # NOTE: lazy doesnt care if these are in startupPlugins or optionalPlugins
-      # also you dont have to download everything via nix if you dont want.
-      # but you have the option, and that is demonstrated here.
+      # This is for plugins that will load at startup without using packadd:
       startupPlugins = with pkgs.vimPlugins; {
         general = [
-          # LazyVim
+          vim-sleuth
           lazy-nvim
-          LazyVim
-          bufferline-nvim
-          lazydev-nvim
-          conform-nvim
-          flash-nvim
-          friendly-snippets
+          comment-nvim
           gitsigns-nvim
-          grug-far-nvim
-          noice-nvim
-          lualine-nvim
-          nui-nvim
-          nvim-lint
-          nvim-lspconfig
-          nvim-treesitter-textobjects
-          nvim-ts-autotag
-          ts-comments-nvim
-          blink-cmp
-          nvim-web-devicons
-          persistence-nvim
-          rustaceanvim
-          plenary-nvim
-          telescope-fzf-native-nvim
-          telescope-nvim
-          todo-comments-nvim
-          trouble-nvim
-          vim-illuminate
-          vim-startuptime
           which-key-nvim
-          snacks-nvim
-          nvim-treesitter-textobjects
+          telescope-nvim
+          telescope-fzf-native-nvim
+          telescope-ui-select-nvim
+          nvim-web-devicons
+          plenary-nvim
+          nvim-lspconfig
+          lazydev-nvim
+          fidget-nvim
+          conform-nvim
+          nvim-cmp
+          luasnip
+          cmp_luasnip
+          cmp-nvim-lsp
+          cmp-path
+          tokyonight-nvim
+          todo-comments-nvim
+          mini-nvim
           nvim-treesitter.withAllGrammars
+          rose-pine
+          oil-nvim
+          lspkind-nvim
+          windsurf-nvim
           # This is for if you only want some of the grammars
           # (nvim-treesitter.withPlugins (
           #   plugins: with plugins; [
@@ -149,17 +151,30 @@
           #     lua
           #   ]
           # ))
-          crates-nvim
-          oil-nvim
-
-          # sometimes you have to fix some names
-          { plugin = rose-pine; name = "rose-pine"; }
-          { plugin = catppuccin-nvim; name = "catppuccin"; }
-          { plugin = mini-ai; name = "mini.ai"; }
-          { plugin = mini-icons; name = "mini.icons"; }
-          { plugin = mini-pairs; name = "mini.pairs"; }
-          # you could do this within the lazy spec instead if you wanted
-          # and get the new names from `:NixCats pawsible` debug command
+        ];
+        kickstart-debug = [
+          nvim-dap
+          nvim-dap-ui
+          nvim-dap-go
+          nvim-nio
+        ];
+        kickstart-indent_line = [
+          indent-blankline-nvim
+        ];
+        kickstart-lint = [
+          nvim-lint
+        ];
+        kickstart-autopairs = [
+          nvim-autopairs
+        ];
+        kickstart-neo-tree = [
+          neo-tree-nvim
+          nui-nvim
+          # nixCats will filter out duplicate packages
+          # so you can put dependencies with stuff even if they're
+          # also somewhere else
+          nvim-web-devicons
+          plenary-nvim
         ];
       };
 
@@ -198,13 +213,14 @@
 
       # lists of the functions you would have passed to
       # python.withPackages or lua.withPackages
+      # do not forget to set `hosts.python3.enable` in package settings
 
       # get the path to this python environment
       # in your lua config via
       # vim.g.python3_host_prog
       # or run from nvim terminal via :!<packagename>-python3
       python3.libraries = {
-        test = [ (_:[]) ];
+        test = (_:[]);
       };
       # populates $LUA_PATH and $LUA_CPATH
       extraLuaPackages = {
@@ -223,7 +239,7 @@
     packageDefinitions = {
       # These are the names of your packages
       # you can include as many as you wish.
-      nvim = { pkgs, name, mkPlugin, ... }: {
+      nvim = { pkgs, name, ... }: {
         # they contain a settings set defined above
         # see :help nixCats.flake.outputs.settings
         settings = {
@@ -232,8 +248,8 @@
           wrapRc = true;
           # IMPORTANT:
           # your alias may not conflict with your other packages.
-          # aliases = [ "vim" ];
-          neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+          aliases = [ "vim" ];
+          # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
           hosts.python3.enable = true;
           hosts.node.enable = true;
         };
@@ -241,25 +257,35 @@
         # (and other information to pass to lua)
         categories = {
           general = true;
-          test = false;
+          gitPlugins = true;
+          customPlugins = true;
+          test = true;
+
+          kickstart-autopairs = true;
+          kickstart-neo-tree = true;
+          kickstart-debug = true;
+          kickstart-lint = true;
+          kickstart-indent_line = true;
+
+          # this kickstart extra didnt require any extra plugins
+          # so it doesnt have a category above.
+          # but we can still send the info from nix to lua that we want it!
+          kickstart-gitsigns = true;
+
+          # we can pass whatever we want actually.
+          have_nerd_font = false;
+
+          example = {
+            youCan = "add more than just booleans";
+            toThisSet = [
+              "and the contents of this categories set"
+              "will be accessible to your lua with"
+              "nixCats('path.to.value')"
+              "see :help nixCats"
+              "and type :NixCats to see the categories set in nvim"
+            ];
+          };
         };
-        extra = {};
-      };
-      # an extra test package with normal lua reload for fast edits
-      # nix doesnt provide the config in this package, allowing you free reign to edit it.
-      # then you can swap back to the normal pure package when done.
-      testnvim = { pkgs, mkPlugin, ... }: {
-        settings = {
-          suffix-path = true;
-          suffix-LD = true;
-          wrapRc = false;
-          unwrappedCfgPath = utils.mkLuaInline "os.getenv('HOME') .. '/some/path/to/your/config'";
-        };
-        categories = {
-          general = true;
-          test = false;
-        };
-        extra = {};
       };
     };
   # In this section, the main thing you will need to do is change the default package name
@@ -270,7 +296,6 @@
 
   # see :help nixCats.flake.outputs.exports
   forEachSystem (system: let
-    # the builder function that makes it all work
     nixCatsBuilder = utils.baseBuilder luaPath {
       inherit nixpkgs system dependencyOverlays extra_pkg_config;
     } categoryDefinitions packageDefinitions;
