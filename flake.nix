@@ -105,6 +105,8 @@
           nixd
           stylua
           gopls
+          yaml-language-server
+          protols
         ];
         kickstart-debug = [
           delve
