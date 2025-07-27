@@ -107,6 +107,7 @@
           gopls
           yaml-language-server
           protols
+          pyright
         ];
         kickstart-debug = [
           delve
