@@ -149,6 +149,7 @@
           lspkind-nvim
           windsurf-nvim
           noice-nvim
+          neogit
           # This is for if you only want some of the grammars
           # (nvim-treesitter.withPlugins (
           #   plugins: with plugins; [
